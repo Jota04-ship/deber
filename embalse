@@ -1,0 +1,74 @@
+class Embalse {
+    constructor() {
+        this.nivelDeAgua = 0;
+        this.observadores = [];
+    }
+
+    // Método para agregar observadores
+    agregarObservador(observador) {
+        this.observadores.push(observador);
+    }
+
+    // Método para eliminar observadores
+    eliminarObservador(observador) {
+        this.observadores = this.observadores.filter(obs => obs !== observador);
+    }
+
+    // Método para notificar a todos los observadores sobre un cambio
+    notificarObservadores() {
+        for (let observador of this.observadores) {
+            observador.actualizar(this.nivelDeAgua);
+        }
+    }
+
+    // Método para establecer el nivel de agua y notificar a los observadores
+    establecerNivelDeAgua(nivel) {
+        this.nivelDeAgua = nivel;
+        this.notificarObservadores();
+    }
+}
+class Observador {
+    actualizar(nivelDeAgua) {
+        throw new Error("Este método debe ser implementado por la subclase");
+    }
+}
+class EstadoOptimo extends Observador {
+    actualizar(nivelDeAgua) {
+        if (nivelDeAgua >= 50 && nivelDeAgua <= 70) {
+            console.log(`Estado Óptimo: El nivel de agua es ${nivelDeAgua} - dentro del rango óptimo.`);
+        }
+    }
+}
+
+class SobreElNivel extends Observador {
+    actualizar(nivelDeAgua) {
+        if (nivelDeAgua > 70) {
+            console.log(`Sobre El Nivel: El nivel de agua es ${nivelDeAgua} - por encima del nivel óptimo.`);
+        }
+    }
+}
+
+class BajoElNivel extends Observador {
+    actualizar(nivelDeAgua) {
+        if (nivelDeAgua < 50) {
+            console.log(`Bajo El Nivel: El nivel de agua es ${nivelDeAgua} - por debajo del nivel óptimo.`);
+        }
+    }
+}
+// Crear una instancia del embalse
+const embalse = new Embalse();
+
+// Crear instancias de observadores
+const estadoOptimo = new EstadoOptimo();
+const sobreElNivel = new SobreElNivel();
+const bajoElNivel = new BajoElNivel();
+
+// Agregar observadores al embalse
+embalse.agregarObservador(estadoOptimo);
+embalse.agregarObservador(sobreElNivel);
+embalse.agregarObservador(bajoElNivel);
+
+// Establecer niveles de agua y ver las notificaciones
+embalse.establecerNivelDeAgua(45);
+embalse.establecerNivelDeAgua(55);
+embalse.establecerNivelDeAgua(75);
