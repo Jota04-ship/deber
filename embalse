@@ -2,6 +2,7 @@ class Embalse {
     constructor() {
         this.nivelDeAgua = 0;
         this.observadores = [];
+        console.log("esto es solo una prueba");
     }
 
     // Método para agregar observadores
