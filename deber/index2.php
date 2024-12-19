@@ -245,6 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container">
         <div class="left">
+           <h1>Hello programers</h1>
             <img src="<?php echo $imagenEnca; ?>" width="277" height="75">
             <img src="<?php echo $imagenPlataforma; ?>" width="277" height="74">
             <p id="faculty-text">Facultad de Ingeniería en Sistemas, Electrónica e Industrial</p>
